@@ -1,0 +1,941 @@
+/* ==========================================================================
+   FOODZERO MENU PAGE — COMPLETE STYLESHEET (No clamp version)
+   --------------------------------------------------------------------------
+   - Custom font loading
+   - CSS variables for color/font management
+   - Reset and base styles
+   - Responsive Flexbox layout
+   - Hero section
+   - Menu sections
+   - Reservation form
+   - Footer
+   - Media queries for all breakpoints
+   - Accessibility improvements
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1. FONT FACES
+   ========================================================================== */
+@font-face {
+  font-family: "Lato";
+  src: url("./Lato/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Rufina";
+  src: url("./Rufina/Rufina-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ==========================================================================
+   2. CSS VARIABLES
+   ========================================================================== */
+:root {
+  /* Brand colors */
+  --dark-green: #233000;
+  --dark-green-hover: #2d4000;
+  --light-green: #ebf0e4;
+
+  /* Neutral colors */
+  --white: #ffffff;
+  --black: #000000;
+  --text: #111111;
+  --muted: #4f5a48;
+  --border: #111111;
+
+  /* Focus color for accessibility */
+  --focus: #f2c14e;
+
+  /* Typography */
+  --font-heading: "Rufina", Georgia, "Times New Roman", serif;
+  --font-body: "Lato", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  /* Smooth transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+
+/* ==========================================================================
+   3. RESET AND BASE STYLES
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  color: var(--text);
+  background-color: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   4. BUTTON SYSTEM
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.5rem;
+  padding: 0 2rem;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--white);
+  background-color: transparent;
+  border: 2px solid var(--white);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal),
+    border-color var(--transition-normal),
+    transform var(--transition-fast);
+}
+
+.btn:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.clear {
+  background-color: transparent;
+}
+
+.btn.primary {
+  background-color: var(--dark-green);
+  border: 2px solid var(--black);
+  color: var(--white);
+  padding: 0 3rem;
+  margin-top: 3rem;
+}
+
+.btn.primary:hover {
+  background-color: var(--dark-green-hover);
+  color: var(--white);
+}
+
+.btn.secondary {
+  background-color: var(--white);
+  border: 2px solid var(--white);
+  color: var(--dark-green);
+}
+
+.btn.secondary:hover {
+  background-color: #f0f0f0;
+  color: var(--dark-green);
+}
+/* ==========================================================================
+   5. HEADER, NAVBAR, AND HERO
+   ========================================================================== */
+.page-header {
+  background-color: #1f2a00;
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.45)
+    ),
+    url("images/menu-header.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  color: var(--white);
+  min-height: 100vh;
+  min-height: 100svh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 1.5rem 4rem 6rem;
+  overflow: hidden;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 5rem;
+  gap: 1rem;
+}
+
+.navbar .left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.navbar .left .nav-menu {
+  order: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+  transition:
+    opacity var(--transition-normal),
+    transform var(--transition-fast);
+}
+
+.navbar .left .nav-menu:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.navbar .left .logo {
+  order: 2;
+  height: 4rem;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+}
+
+.navbar .right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.navbar .right .phone {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--white);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* Hero */
+.hero-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1.5rem;
+  max-width: 900px;
+  position: relative;
+}
+
+.hero-container::after {
+  content: "";
+  display: block;
+  width: 6rem;
+  height: 4px;
+  margin-top: 2rem;
+  background-color: var(--white);
+  opacity: 0.9;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 7rem;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+}
+
+.subtitle {
+  margin-top: 1.5rem;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  line-height: 1.4;
+  max-width: 60ch;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.22);
+}
+
+
+/* ==========================================================================
+   6. MAIN CONTENT AND SECTION HEADINGS
+   ========================================================================== */
+main {
+  overflow-x: hidden;
+}
+
+.section-heading-container {
+  text-align: center;
+  padding: 4rem 1.5rem 2rem;
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+.section-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
+
+/* ==========================================================================
+   7. MENU SECTION
+   ========================================================================== */
+.menu-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem 5rem 4rem;
+}
+
+.menu-img {
+  flex: 1 1 50%;
+  width: 50%;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: var(--light-green);
+}
+
+.menu-options {
+  flex: 1 1 50%;
+  width: 50%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.menu-item {
+  width: 100%;
+}
+
+.menu-item > p {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  line-height: 1;
+  text-align: right;
+  margin: 0;
+}
+
+.item-info {
+  margin-top: 0.75rem;
+  padding-top: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-top: 4px dotted var(--border);
+}
+
+.item-info h3 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  line-height: 1.05;
+  margin-bottom: 1rem;
+  text-wrap: balance;
+}
+
+.item-info p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  line-height: 1.45;
+  color: var(--muted);
+  margin: 0;
+}
+/* ==========================================================================
+   8. RESERVATION SECTION
+   ========================================================================== */
+.reservation-container {
+  background-color: var(--light-green);
+  padding: 5rem 5rem;
+  text-align: center;
+}
+
+.reservation-container .section-heading-container {
+  padding-top: 0;
+}
+
+.scheduling-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  gap: 1.5rem;
+}
+
+.scheduling-container input,
+.scheduling-container select {
+  flex: 1 1 0;
+  min-width: 0;
+  width: 100%;
+  height: 4rem;
+  padding: 0 1.5rem;
+  border: 2px solid var(--black);
+  background-color: var(--light-green);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+}
+
+.scheduling-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding-right: 3rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+}
+
+.scheduling-container input[type="date"]::-webkit-calendar-picker-indicator,
+.scheduling-container input[type="time"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+
+/* ==========================================================================
+   9. FOOTER
+   ========================================================================== */
+footer {
+  background-color: var(--dark-green);
+  color: var(--white);
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  padding: 4rem 5rem;
+}
+
+.contact-container .left {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.contact-container .middle {
+  flex: 0 1 260px;
+  min-width: 220px;
+}
+
+.contact-container .right {
+  flex: 1 1 320px;
+  min-width: 260px;
+}
+
+.footer-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  line-height: 1.05;
+}
+
+.footer-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+
+.middle p {
+  margin-bottom: 1rem;
+  line-height: 1.55;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.middle p:last-child {
+  margin-bottom: 0;
+}
+
+.newsletter-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.newsletter-container input {
+  flex: 1 1 220px;
+  min-width: 0;
+  height: 3.5rem;
+  padding: 0 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background-color: transparent;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.newsletter-container input::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.newsletter-container .btn.secondary {
+  flex: 0 0 auto;
+  height: 3.5rem;
+  font-size: 1rem;
+}
+
+.newsletter-info {
+  margin-top: 1rem;
+  max-width: 360px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.copyright-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.copyright-info {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.socials-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.socials-container img {
+  width: 1.35rem;
+  height: 1.35rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.82;
+  transition:
+    opacity var(--transition-normal),
+    transform var(--transition-fast);
+}
+
+.socials-container img:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+/* ==========================================================================
+   10. RESPONSIVE MEDIA QUERIES
+   Breakpoints: 1200px, 992px, 768px, 480px
+   ========================================================================== */
+
+/* ----------------------------- MAX WIDTH 1200px -------------------------- */
+@media (max-width: 1200px) {
+  .page-header {
+    padding: 1.25rem 3rem 5rem;
+  }
+
+  .menu-container {
+    padding: 2.5rem 3rem 3.5rem;
+    gap: 2.5rem;
+  }
+
+  .reservation-container {
+    padding: 4rem 3rem;
+  }
+
+  .contact-container {
+    padding: 3.5rem 3rem;
+    gap: 2.5rem;
+  }
+
+  .copyright-container {
+    padding: 1.5rem 3rem;
+  }
+
+  .title {
+    font-size: 5.5rem;
+  }
+
+  .section-title {
+    font-size: 3.5rem;
+  }
+
+  .item-info h3 {
+    font-size: 2.6rem;
+  }
+
+  .menu-item > p {
+    font-size: 2rem;
+  }
+}
+
+/* ------------------------------ MAX WIDTH 992px -------------------------- */
+@media (max-width: 992px) {
+  .page-header {
+    padding: 1.25rem 2rem 4rem;
+  }
+
+  /* Stack menu image and menu items vertically */
+  .menu-container {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 2.5rem 2rem 3.5rem;
+    gap: 2rem;
+  }
+
+  .menu-img,
+  .menu-options {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  /* Always show image first */
+  .menu-img {
+    order: -1;
+    aspect-ratio: 16 / 10;
+  }
+
+  /* Stack reservation fields vertically */
+  .scheduling-container {
+    flex-direction: column;
+  }
+
+  /* Allow footer columns to wrap */
+  .contact-container {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .contact-container .left {
+    flex: 1 1 45%;
+  }
+
+  .contact-container .middle {
+    flex: 1 1 45%;
+  }
+
+  .contact-container .right {
+    flex: 1 1 100%;
+  }
+
+  .title {
+    font-size: 4.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .section-title {
+    font-size: 3rem;
+  }
+
+  .item-info h3 {
+    font-size: 2.2rem;
+  }
+
+  .menu-item > p {
+    font-size: 1.8rem;
+  }
+}
+
+/* ------------------------------ MAX WIDTH 768px -------------------------- */
+@media (max-width: 768px) {
+  /* Stack navbar vertically */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .navbar .left,
+  .navbar .right {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Center hero content */
+  .hero-container {
+    padding-left: 0;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .hero-container::after {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .title,
+  .subtitle {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.15rem;
+  }
+
+  /* Section headings */
+  .section-heading-container {
+    padding: 3rem 1.5rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+  }
+
+  /* Menu items */
+  .item-info h3 {
+    font-size: 1.9rem;
+  }
+
+  .menu-item > p {
+    font-size: 1.6rem;
+  }
+
+  .item-info p {
+    font-size: 1rem;
+  }
+
+  /* Reservation */
+  .reservation-container {
+    padding: 3rem 1.5rem;
+  }
+
+  /* Stack footer columns vertically */
+  .contact-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3rem 1.5rem;
+    gap: 2rem;
+  }
+
+  .contact-container .left,
+  .contact-container .middle,
+  .contact-container .right {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .newsletter-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletter-container input,
+  .newsletter-container .btn.secondary {
+    width: 100%;
+  }
+
+  /* Stack copyright and socials */
+  .copyright-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .socials-container {
+    justify-content: center;
+  }
+
+  .footer-title {
+    font-size: 2rem;
+  }
+
+  .footer-subtitle {
+    font-size: 1.4rem;
+  }
+}
+
+/* ------------------------------ MAX WIDTH 480px -------------------------- */
+@media (max-width: 480px) {
+  .page-header {
+    padding: 1rem 1.25rem 3rem;
+  }
+  /* Compact buttons */
+  .btn {
+    height: 3.25rem;
+    font-size: 1.05rem;
+    padding: 0 1.5rem;
+  }
+
+  .btn.primary {
+    width: 100%;
+    max-width: 320px;
+    padding: 0 1.5rem;
+  }
+
+  .btn.secondary {
+    width: 100%;
+  }
+
+  /* Hero typography */
+  .title {
+    font-size: 2.75rem;
+    line-height: 1;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+  }
+
+  /* Menu typography */
+  .menu-container {
+    padding: 2rem 1.25rem 3rem;
+    gap: 1.5rem;
+  }
+
+  .menu-item > p {
+    font-size: 1.5rem;
+  }
+
+  .item-info h3 {
+    font-size: 1.6rem;
+  }
+
+  .item-info p {
+    font-size: 1rem;
+  }
+
+  /* Section headings */
+  .section-heading-container {
+    padding: 2.5rem 1rem 1.25rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  /* Reservation */
+  .reservation-container {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .scheduling-container input,
+  .scheduling-container select {
+    height: 3.5rem;
+    font-size: 1.05rem;
+    padding: 0 1rem;
+  }
+
+  .scheduling-container select {
+    padding-right: 2.5rem;
+    background-position: right 0.85rem center;
+  }
+
+  /* Footer */
+  .contact-container {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .copyright-container {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .footer-title {
+    font-size: 1.75rem;
+  }
+
+  .footer-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .socials-container img {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .newsletter-container input,
+  .newsletter-container .btn.secondary {
+    height: 3.25rem;
+  }
+}
+
+
+/* ==========================================================================
+   11. REDUCED MOTION SUPPORT
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
